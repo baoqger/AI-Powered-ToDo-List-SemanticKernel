@@ -6,7 +6,7 @@ import os
 from contextlib import AsyncExitStack
 from dotenv import load_dotenv
 from .services import TaskService
-from .agents import FoundryTaskAgent, AgentTools, SKAgent, SKAgentPlugins
+from .agents import SKAgent
 from .routes import create_api_routes
 
 # Load environment variables from .env file
@@ -33,13 +33,10 @@ class TaskManagerApp:
                 {"url": server_url, "description": "Task Manager API Server"}
             ]
         )
-
-        #self.foundry_agent: FoundryTaskAgent = None
         self.exit_stack = None
 
         # Initialize services
         self.task_service = TaskService()
-        # self.agents_tools = AgentTools(self.task_service)
         self.sk_agent = SKAgent(self.task_service)
 
         self._setup_middleware()
@@ -49,7 +46,6 @@ class TaskManagerApp:
         async def startup_event():
             self.exit_stack = AsyncExitStack()
             await self.exit_stack.__aenter__()
-            # self.foundry_agent = await FoundryTaskAgent.create(self.exit_stack, self.agents_tools)
             self._setup_routes()  
 
         @self.app.on_event("shutdown")
@@ -57,8 +53,6 @@ class TaskManagerApp:
             """Cleanup resources."""
             print("Shutting down Task Manager app...")
             self.task_service.close()
-            # await self.foundry_agent.cleanup()            
-            # delete the Agent on Azure
             if self.exit_stack:
                 await self.exit_stack.__aexit__(None, None, None)
     

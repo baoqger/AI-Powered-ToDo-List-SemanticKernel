@@ -2,7 +2,7 @@ from fastapi import APIRouter, HTTPException
 from typing import List
 from ..models import TaskItem, TaskCreateRequest, TaskUpdateRequest, ChatRequest, ChatMessage
 from ..services import TaskService
-from ..agents import FoundryTaskAgent, SKAgent
+from ..agents import SKAgent
 
 
 def create_api_routes(
