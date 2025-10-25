@@ -272,7 +272,7 @@
                                     }`}>
                                         <div className="fw-bold mb-1">
                                             {message.role === 'user' ? 'You' : 
-                                             selectedAgent === 'langgraph' ? 'LangGraph Assistant' : 'Foundry Assistant'}
+                                             selectedAgent === 'langgraph' ? 'LangGraph Assistant' : 'SK Assistant'}
                                         </div>
                                         <div>{message.content}</div>
                                     </div>
@@ -281,7 +281,7 @@
                             {loading && (
                                 <div className="chat-message mb-3 p-2 rounded bg-white me-5">
                                     <div className="fw-bold mb-1">
-                                        {selectedAgent === 'langgraph' ? 'LangGraph Assistant' : 'Foundry Assistant'}
+                                        {selectedAgent === 'langgraph' ? 'LangGraph Assistant' : 'SK Assistant'}
                                     </div>
                                     <div>Thinking...</div>
                                 </div>
