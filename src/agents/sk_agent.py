@@ -55,12 +55,9 @@ class SKAgent:
         async for response in self.agent.invoke_stream(
             messages=message, thread=self.thread,
         ):
-            # 5. Print the response
             if first_chunk:
                 content += f"# {response.name}: "
-                # print(f"# {response.name}: ", end="", flush=True)
                 first_chunk = False
-            # print(f"{response}", end="", flush=True)
             content+= str(response)
             self.thread = response.thread
 
